@@ -9,10 +9,7 @@ public class OrderFormTest {
 
     @BeforeAll
     static void setup() {
-        String headless = System.getProperty("selenide.headless", "false");
-        Configuration.headless = Boolean.parseBoolean(headless);
     }
-
     @Test
     void shouldSubmitOrderForm() {
         open("http://localhost:9999");
