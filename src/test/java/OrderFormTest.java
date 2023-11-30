@@ -9,8 +9,8 @@ public class OrderFormTest {
 
     @BeforeAll
     static void setup() {
-        Configuration.headless = true;
-
+        String headless = System.getProperty("selenide.headless", "false");
+        Configuration.headless = Boolean.parseBoolean(headless);
     }
 
     @Test
@@ -22,6 +22,8 @@ public class OrderFormTest {
         $("[data-test-id=agreement]").click();
         $$("[type=button]").find(exactText("Продолжить")).click();
 
-        $("[data-test-id=order-success]").shouldBe(visible);
+        $("[data-test-id=order-success]")
+                .shouldHave(visible)
+                .shouldHave(text("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время."));
     }
 }
